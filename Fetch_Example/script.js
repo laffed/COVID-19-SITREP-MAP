@@ -1,6 +1,6 @@
-const clickMe = async () => {
-    const myVal = await fetchRetry();
-    console.log(myVal);
+const runCall = async () => {
+    const apiValue = await fetchRetry();
+    console.log(apiValue);
 }
 
 const fetchRetry = async (n = 0) => {
@@ -8,12 +8,12 @@ const fetchRetry = async (n = 0) => {
         method: "GET",
         redirect: "follow"
     }
-
     const maxRetry = 15;
-    const apiUrl = `https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/${getDateString(n)}.csv`
+
+    const apiURL = `https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/${getDateString(n)}.csv`
 
     try {
-        const response = await fetch(apiUrl, requestOptions);
+        const response = await fetch(apiURL, requestOptions);
         return response.ok ?
             response.text() :
             n + 1 < maxRetry ?
@@ -36,8 +36,8 @@ const getDateString = (n) => {
     const [month, , day, , year] = format.formatToParts(date);
 
     return `${month.value}-${day.value}-${year.value}`
-}
 
+}
 
 const daysToMs = (n) => {
     return n * 24 * 60 * 60 * 1000
