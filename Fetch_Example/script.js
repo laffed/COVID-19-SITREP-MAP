@@ -1,6 +1,7 @@
 const runCall = async () => {
-    const apiValue = await fetchRetry();
-    console.log(apiValue);
+    let apiValue = await fetchRetry();
+
+    console.log(apiValue)
 }
 
 const fetchRetry = async (n = 0) => {
@@ -26,6 +27,9 @@ const fetchRetry = async (n = 0) => {
 }
 
 const getDateString = (n) => {
+    const daysToMs = (n) => {
+        return n * 24 * 60 * 60 * 1000
+    }
     const date = new Date(Date.now() - daysToMs(n))
     const format = new Intl.DateTimeFormat("en", {
         day: "2-digit",
@@ -37,8 +41,4 @@ const getDateString = (n) => {
 
     return `${month.value}-${day.value}-${year.value}`
 
-}
-
-const daysToMs = (n) => {
-    return n * 24 * 60 * 60 * 1000
 }
